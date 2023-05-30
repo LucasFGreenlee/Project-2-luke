@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
+const axios = require('axios');
 
 //environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
@@ -35,6 +36,22 @@ app.use((req, res, next) => {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next();
+});
+
+app.get('/friends', (req, res) => {
+  res.render('friends');
+});
+
+app.get('/add_friend', (req, res) => {
+  res.render('add_friend');
+});
+
+app.get('/news', (req, res) => {
+  res.render('news');
+});
+
+app.get('/upcoming_games', (req, res) => {
+  res.render('upcoming_games');
 });
 
 
