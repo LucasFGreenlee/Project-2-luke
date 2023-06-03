@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
+const api_key = process.env.STEAM_API_KEY;
 
 //environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
@@ -38,25 +39,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/friends', (req, res) => {
-  res.render('friends');
-});
-
-app.get('/add_friend', (req, res) => {
-  res.render('add_friend');
-});
-
-app.get('/news', (req, res) => {
-  res.render('news');
-});
-
-app.get('/upcoming_games', (req, res) => {
-  res.render('upcoming_games');
-});
-
+// app.get('/', (req, res) => {
+//   res.render('index');
+// })
 
 app.get('/', (req, res) => {
-  res.render('index');
+  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
+  .then(response => {
+    console.log(response.data);
+    return res.render('index', {response: response.data});
+  })
+  .catch(err => {
+    console.log(err);
+  })
 })
 
 app.use('/auth', require('./controllers/auth'));
@@ -66,6 +61,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
   res.render('profile', { id, name, email });
 });
+
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
