@@ -8,6 +8,7 @@ const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
 const api_key = process.env.STEAM_API_KEY;
+const steam_id = process.env.STEAM_ID;
 
 //environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
