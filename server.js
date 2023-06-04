@@ -40,15 +40,27 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/', (req, res) => {
-//   res.render('index');
-// })
+ app.get('/', (req, res) => {
+   res.render('index');
+ })
 
-app.get('/', (req, res) => {
+app.get('/playersummary', (req, res) => {
+  console.log('wtf')
   axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
   .then(response => {
     console.log(response.data);
-    return res.render('index', {response: response.data});
+    return res.render('playersummary', {playerdata: response.data});
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+
+app.get('/steamgames', (req, res) => {
+  axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
+  .then(response => {
+    console.log(response.data);
+    return res.render('steamgames', {allgames: response.data});
   })
   .catch(err => {
     console.log(err);

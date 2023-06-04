@@ -1,0 +1,48 @@
+<section class="pt-6">
+    <div class="container shadow section-sm rounded">
+        <div class="columns is-multiline">
+            <!-- sidebar -->
+            <div class="column is-3-desktop is-12-tablet">
+                <ul class="sidenav">
+                    <li title="steamgames" class="sidelist parent active">
+                        <a href="/steamgames">steamgames</a>
+                        <ul>
+                            <li class="sidelist parent active">
+                                <a href="/steamgames/<%= allgames.applist.app.appid %>">
+                                    <%= allgames.realname %>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+            <div class="column is-8-desktop is-12-tablet">
+                <div class="px-4">
+                    <h2 class="mb-4 has-text-weight-medium">Single Player - <a class="has-text-weight-light"
+                            href="/steamgames/search">search</a></h2>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <span class="has-text-weight-medium">Primary Client ID: </span>
+                                    <%= allgames.primaryclientid %><br />
+                                        <span class="has-text-weight-medium">Time Created: </span>
+                                        <%= allgames.timecreated %><br />
+                                            <span class="has-text-weight-medium">Last Log Off: </span>
+                                            <%= allgames.lastlogoff %><br />
+                                                <span class="has-text-weight-medium">Profile URL: </span>
+                                                <%= allgames.profileurl %><br />
+                                                    <span class="has-text-weight-medium">Persona State: </span>
+                                                    <%= allgames.personastate %><br />
+                                                        <span class="has-text-weight-medium">Real Name: </span>
+                                                        <%= allgames.realname %><br />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
