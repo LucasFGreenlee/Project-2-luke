@@ -45,7 +45,7 @@ app.use((req, res, next) => {
  })
 
 app.get('/playersummary', (req, res) => {
-  console.log('wtf')
+  //console.log('wtf')
   axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
   .then(response => {
     console.log(response.data);
@@ -60,11 +60,15 @@ app.get('/steamgames', (req, res) => {
   axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
   .then(response => {
     console.log(response.data);
-    return res.render('steamgames', {allgames: response.data});
+    return res.render('steamgames', {gamedata: response.data});
   })
   .catch(err => {
     console.log(err);
   })
+})
+
+app.get('/steamgame/search', (req, res) => {
+  return res.render('steamgame/search');
 })
 
 app.use('/auth', require('./controllers/auth'));
@@ -75,6 +79,26 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile', { id, name, email });
 });
 
+app.get('/search', (req, res) => {
+  res.render('search');
+})
+
+app.get('/search', (req, res) => {
+
+  let item, searchBy, searchVal;
+
+  for (let key in req.query) {
+    switch (key) {
+      case 'item':
+        item = req.query[key];
+        break;
+      default:
+        searchBy = key;
+        searchVal = req.query[key];
+        break;
+    }
+  }
+})
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {

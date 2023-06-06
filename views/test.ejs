@@ -1,0 +1,24 @@
+<section class="pt-6">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th><abbr title="name">Name</abbr></th>
+
+                <th><abbr title="appid">Appid</abbr></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < gamedata.applist.apps.length; i++) { %>
+            <tr>
+
+                <td><a href="/steamgames/<%= gamedata.applist.apps[i].appid %>"><%= gamedata.applist.apps[i].name %></a>
+                </td>
+
+                <td><%= gamedata.applist.apps[i].appid %></td>
+
+            </tr>
+            <% } %>
+    </table>
+</section>

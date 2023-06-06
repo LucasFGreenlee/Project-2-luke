@@ -7,19 +7,13 @@
                     <li title="playersummary" class="sidelist parent active">
                         <a href="/playersummary">playersummary</a>
                         <ul>
-                            <li class="sidelist parent active">
-                                <a href="/playersummary/<%= playerdata.response.players[0].steamid %>">
-                                    <%= playerdata.response.players[0].realname %>
-                                </a>
-                            </li>
+                            
 
                         </ul>
                     </li>
 
             <div class="column is-8-desktop is-12-tablet">
                 <div class="px-4">
-                    <h2 class="mb-4 has-text-weight-medium">Single Player - <a class="has-text-weight-light"
-                            href="/playersummary/search">search</a></h2>
                     <div class="card">
                         <div class="card-content">
                             <div class="media">
@@ -27,8 +21,7 @@
                                     <p class="title is-4">
                                         <%= playerdata.response.players[0].personaname %>
                                     </p>
-                                    <span class="has-text-weight-medium">Primary Client ID: </span>
-                                    <%= playerdata.response.players[0].primaryclientid %><br />
+                                    
                                         <span class="has-text-weight-medium">Time Created: </span>
                                         <%= playerdata.response.players[0].timecreated %><br />
                                             <span class="has-text-weight-medium">Last Log Off: </span>
