@@ -1,0 +1,1 @@
+Recently Played Games: http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamid=76561198171430935&format=json

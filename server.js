@@ -45,6 +45,8 @@ app.use((req, res, next) => {
    res.render('index');
  })
 
+
+
 app.get('/playersummary', (req, res) => {
   //console.log('wtf')
   axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${api_key}&steamids=${steam_id}')
@@ -178,21 +180,8 @@ app.get('/search', (req, res) => {
   res.render('search');
 })
 
-app.get('/search', (req, res) => {
-
-  let item, searchBy, searchVal;
-
-  for (let key in req.query) {
-    switch (key) {
-      case 'item':
-        item = req.query[key];
-        break;
-      default:
-        searchBy = key;
-        searchVal = req.query[key];
-        break;
-    }
-  }
+app.get('*', (req, res) => {
+  res.render('search');
 })
 
 const PORT = process.env.PORT || 3000;
