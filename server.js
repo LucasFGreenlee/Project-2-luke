@@ -101,39 +101,6 @@ app.post('/steamgame/search', (req, res) => {
   })
 })
 
-// app.post('/steamgame/search', (req, res) => {
-//   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
-//   .then(response => {
-    
-//     const gameArray = [];
-//     for (let i in response.data.applist.apps) {
-//       let core = response.data.applist.apps[i];
-//       let userReq = req.params[0];
-
-//       if(userReq[0] === 'name') { // search by name
-//         if(core.name.toUpperCase() === userReq[1].toUpperCase()) {
-//         return res.json({ core});
-//       }
-//     } else if(userRequest[0] === 'appid') { // search by appid
-//       if(core.appid === Number(userReq[1])) {
-//         gameArray.push(core);
-//       }
-//     } else {
-//       return res.json({ message: 'Game not found'});
-//     }
-//   }
-
-//   if(gameArray.length > 0) {
-//     return res.json({ games: gameArray });
-//   } else {
-//     return res.json({ message: 'Game not found'});
-//   }
-// })
-// .catch(err => {
-//   console.log(err);
-// })
-// })
-
 app.get('/steamgame/:appid', (req, res) => {
   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
   .then(function (response) {

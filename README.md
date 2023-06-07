@@ -56,7 +56,7 @@ axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key
 
 axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
 
-axios.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamid=76561198171430935&format=json')
+axios.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${api_key}&steamid=${steam_id}&format=json')
 ```
 
 ##  Goals:
