@@ -51,6 +51,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
+    "react-icons": "^4.9.0",
     "sequelize": "^6.21.6",
     "steamapi": "^2.2.0",
     "swr": "^2.1.5"

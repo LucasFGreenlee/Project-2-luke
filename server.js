@@ -71,12 +71,12 @@ app.get('/steamgames', (req, res) => {
 let gamedata;
 
 app.get('/steamgame/search', (req, res) => {
-  console.log('wtf');
+  //console.log('wtf');
   axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
   .then(response => {
-  console.log('wtf2');
+  //console.log('wtf2');
   gamedata = response.data;
-  console.log(gamedata);
+  //console.log(gamedata);
   return res.render('steamgame/search', {gamedata: response.data});
   })
   .catch(err => {
@@ -87,14 +87,50 @@ app.get('/steamgame/search', (req, res) => {
 app.post('/steamgame/search', (req, res) => {
   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
   .then(response => {
-    if (gamedata.applist.apps.appid == req.body.item)
-    console.log(response.data);
-    return res.redirect(`/steamgame/${req.body.item}`);
+    gamedata.applist.apps.forEach(element => {
+      if (element.appid == req.body.item) {
+        console.log(element.appid);
+        return res.render('single-steamgame',{appid: element.appid, gamename: element.name});
+      }
+    });
   })
   .catch(err => {
     console.log(err);
   })
 })
+
+// app.post('/steamgame/search', (req, res) => {
+//   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
+//   .then(response => {
+    
+//     const gameArray = [];
+//     for (let i in response.data.applist.apps) {
+//       let core = response.data.applist.apps[i];
+//       let userReq = req.params[0];
+
+//       if(userReq[0] === 'name') { // search by name
+//         if(core.name.toUpperCase() === userReq[1].toUpperCase()) {
+//         return res.json({ core});
+//       }
+//     } else if(userRequest[0] === 'appid') { // search by appid
+//       if(core.appid === Number(userReq[1])) {
+//         gameArray.push(core);
+//       }
+//     } else {
+//       return res.json({ message: 'Game not found'});
+//     }
+//   }
+
+//   if(gameArray.length > 0) {
+//     return res.json({ games: gameArray });
+//   } else {
+//     return res.json({ message: 'Game not found'});
+//   }
+// })
+// .catch(err => {
+//   console.log(err);
+// })
+// })
 
 app.get('/steamgame/:appid', (req, res) => {
   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)

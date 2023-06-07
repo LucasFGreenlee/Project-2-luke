@@ -3,14 +3,9 @@
         href="./steamgame/search">Search</a></h2>
         <ul>
             <li class="sidelist parent active">
-                <a href="./steamgame/<%= gamedata.applist.apps[0].appid %>"><%= gamedata.applist.apps[0].name %></a>
+                <p>Im Here</p>
+               <%= appid %>
+               <%= gamename %>
             </li>
-            <% gamedata.applist.apps.forEach((game)=> { %>
-                <% if (gamedata.applist.apps[0].appid !== gamedata.applist.apps[0].appid) { %>
-                    <li class="sidelist">
-                        <a href="./steamgame/<%= gamedata.applist.apps[0].appid %>"><%= gamedata.applist.apps[0].name %></a>
-                    </li>
-                <% } %>
-            <% }); %>
         </ul>
 </section>
