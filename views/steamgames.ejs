@@ -1,6 +1,6 @@
 <section class="pt-6">
     <h2 class="mb-4 has-text-weight-medium">Single Game - <a class="has-text-weight-light"
-        href="./steamgame/search.ejs">search</a></h2>
+        href="./steamgame/search">Search</a></h2>
     <table class="table">
         <thead>
             <tr>
@@ -15,7 +15,7 @@
             <% for (var i = 0; i < gamedata.applist.apps.length; i++) { %>
             <tr>
 
-                <td><a href="/steamgames/<%= gamedata.applist.apps[i].appid %>"><%= gamedata.applist.apps[i].name %></a>
+                <td><a href="/steamgame/<%= gamedata.applist.apps[i].appid %>"><%= gamedata.applist.apps[i].name %></a>
                 </td>
 
                 <td><%= gamedata.applist.apps[i].appid %></td>

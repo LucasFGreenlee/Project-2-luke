@@ -40,13 +40,14 @@ app.use((req, res, next) => {
   next();
 });
 
+
  app.get('/', (req, res) => {
    res.render('index');
  })
 
 app.get('/playersummary', (req, res) => {
   //console.log('wtf')
-  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
+  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${api_key}&steamids=${steam_id}')
   .then(response => {
     console.log(response.data);
     return res.render('playersummary', {playerdata: response.data});
@@ -55,7 +56,7 @@ app.get('/playersummary', (req, res) => {
     console.log(err);
   })
 })
-
+  
 app.get('/steamgames', (req, res) => {
   axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
   .then(response => {
@@ -67,16 +68,74 @@ app.get('/steamgames', (req, res) => {
   })
 })
 
+let gamedata;
+
 app.get('/steamgame/search', (req, res) => {
-  return res.render('steamgame/search');
+  console.log('wtf');
+  axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
+  .then(response => {
+  console.log('wtf2');
+  gamedata = response.data;
+  console.log(gamedata);
+  return res.render('steamgame/search', {gamedata: response.data});
+  })
+  .catch(err => {
+    console.log(err);
+  })
 })
+
+app.post('/steamgame/search', (req, res) => {
+  axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
+  .then(response => {
+    if (gamedata.applist.apps.appid == req.body.item)
+    console.log(response.data);
+    return res.redirect(`/steamgame/${req.body.item}`);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+
+app.get('/steamgame/:appid', (req, res) => {
+  axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
+  .then(function (response) {
+    // handle success
+    let found = false;
+    
+   //   console.log(response, '===========================================================')
+    for (let i = 0; i < response.data.applist.apps.length; i++) {
+        let app = response.data.applist.apps[i];
+
+        console.log(app)
+
+        if (app.appid === Number(req.params.appid)) {
+            res.json({ data: response.data.applist.apps[i] });
+            found = true;
+        }
+    }
+    if (!found) {
+        res.json({ data: 'Game does not exist' });
+    }
+})
+.catch(function (error) {
+    res.json({ message: 'Data not found. Please try again later.' });
+});
+})
+
+
 
 app.use('/auth', require('./controllers/auth'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const { id, name, email } = req.user.get(); 
-  res.render('profile', { id, name, email });
+  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
+  .then(response => {
+    console.log(response.data);
+    return res.render('profile', {playerdata: response.data});
+  })
+  .catch(err => {
+    console.log(err);
+  })
 });
 
 app.get('/search', (req, res) => {
