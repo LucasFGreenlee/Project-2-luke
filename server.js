@@ -48,8 +48,9 @@ app.use((req, res, next) => {
 
 
 app.get('/playersummary', (req, res) => {
-  //console.log('wtf')
-  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${api_key}&steamids=${steam_id}')
+ // let apiCall = 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='+api_key+'&steamids='+steam_id;
+ // console.log('apiCall: ', apiCall);
+  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='+api_key+'&steamids='+steam_id)
   .then(response => {
     console.log(response.data);
     return res.render('playersummary', {playerdata: response.data});
@@ -133,7 +134,7 @@ app.use('/auth', require('./controllers/auth'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=031D3D24A6530B0ED7989AFC928E9B6F&steamids=76561198171430935')
+  axios.get('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='+api_key+'&steamids='+steam_id)
   .then(response => {
     console.log(response.data);
     return res.render('profile', {playerdata: response.data});
