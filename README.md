@@ -73,7 +73,7 @@ axios.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v00
 
 ## Blocker Route
 ```js
-```
+
 app.post('/steamgame/search', (req, res) => {
   axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
   .then(response => {
