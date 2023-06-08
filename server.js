@@ -92,7 +92,7 @@ app.post('/steamgame/search', (req, res) => {
   .then(response => {
     gamedata.applist.apps.forEach(element => {
       if (element.appid == req.body.item) {
-        console.log(element.appid);
+       // console.log(element.appid);
         return res.render('single-steamgame',{appid: element.appid, gamename: element.name});
       }
     });

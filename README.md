@@ -68,3 +68,5 @@ axios.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v00
 `2` Display owned games, friends list, and data for owned games
 
 `3` Chat system and adding friends
+
+`4` *Favorite Games list with delete and put routes*
