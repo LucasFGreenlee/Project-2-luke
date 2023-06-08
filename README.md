@@ -70,3 +70,21 @@ axios.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v00
 `3` Chat system and adding friends
 
 `4` *Favorite Games list with delete and put routes*
+
+## Blocker Route
+```js
+```
+app.post('/steamgame/search', (req, res) => {
+  axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`)
+  .then(response => {
+    gamedata.applist.apps.forEach(element => {
+      if (element.appid == req.body.item) {
+       // console.log(element.appid);
+        return res.render('single-steamgame',{appid: element.appid, gamename: element.name});
+      }
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
